@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OKvision - OSINT Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="hacker-container shadow-eff mb-5">
+        <header>
+            <h1 class="glitch" data-text="OKvision">OKvision</h1>
+            <p>> Sistema de Rastreamento OSINT Avançado _</p>
+        </header>
+        
+        <form id="search-form" action="/" method="POST">
+            <div class="form-group">
+                <label for="type">> SELECIONE O TIPO DE ALVO:</label>
+                <select name="type" id="type" required>
+                    <option value="" disabled selected>-- SELECIONE --</option>
+                    <option value="Instagram">Instagram/Username</option>
+                    <option value="Nome">Nome Completo</option>
+                    <option value="Email">E-mail</option>
+                    <option value="Telefone">Telefone</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="query">> INSIRA A STRING DE BUSCA:</label>
+                <input type="text" name="query" id="query" placeholder="ex: jondoe ou Jon Doe" required autocomplete="off">
+            </div>
+            
+            <!-- Campos escondidos para 'Nome' conforme requisitado -->
+            <div id="extra-name-fields" style="display: none;">
+                <div class="form-group">
+                    <label for="age">> INFORME A IDADE (OBRIGATÓRIO):</label>
+                    <input type="number" name="age" id="age" placeholder="Ex: 35">
+                </div>
+                <div class="form-group">
+                    <label for="family">> FAMILIAR CONHECIDO:</label>
+                    <input type="text" name="family" id="family" placeholder="Nome da mãe, pai, irmão...">
+                </div>
+                <div class="form-group">
+                    <label for="workplace">> LOCAL DE TRABALHO:</label>
+                    <input type="text" name="workplace" id="workplace" placeholder="Empresa anterior ou atual">
+                </div>
+            </div>
+            
+            <button type="submit" id="submit-btn">> INICIAR VARREDURA [ENTER]</button>
+        </form>
+        
+        <div id="progress-container" style="display: none;">
+            <div class="terminal-loader">
+                <div class="terminal-text" id="status-text">> Iniciando terminal OKvision...</div>
+                <div class="progress-bar-wrap">
+                    <div class="progress-bar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
