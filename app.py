@@ -16,17 +16,22 @@ def run_osint_simulation(target_type, query, extra_data=None):
     
     if target_type == "Nome":
         results["data_found"].extend([
-            {"source": "Sherlock", "info": "Múltiplos rastros sociais encontrados sob esse perfil."},
-            {"source": "Google Dorks", "info": f"Foram coletados documentos indexados no cache da web que batem com '{query}'."},
-            {"source": "Cruzamento de Dados Privados", "info": f"Base de idade: {extra_data.get('age', 'N/A')} // Relação Familiar: {extra_data.get('family', 'N/A')}"}
+            {"source": "Sherlock", "info": f"Múltiplos rastros sociais encontrados para '{query}'."},
+            {"source": "Processos", "info": "2 ocorrências encontradas (TJSP)."},
+            {"source": "Cruzamento Privado", "info": f"Base de idade: {extra_data.get('age', 'N/A')} // Relação Familiar: {extra_data.get('family', 'N/A')}"},
+            {"source": "Google Dorks", "info": f"site:linkedin.com '{query}' '{extra_data.get('workplace', '')}' -> 1 possivel perfil encontrado."}
         ])
     elif target_type == "Instagram":
         results["data_found"].extend([
-            {"source": "Instaloader Tracker", "info": f"Metadados ID do Instagram '{query}' identificados na rede. Aguardando a verificação manual ou de proxy."},
-            {"source": "Analise de Bio", "info": "Análises relógicas completadas."}
+            {"source": "Osintgram", "info": f"Coletando ID de Instagram e telefone parcial para '{query}'."},
+            {"source": "Possíveis e-mails", "info": f"{query[:3]}...@email.com"},
+            {"source": "Conexões Instagram", "info": f"@{query}_oficial, @{query}.dev"}
         ])
     else:
-        results["data_found"].append({"source": "Geral OSINT Web", "info": "Consultas variadas executadas, não foram encontrados laços públicos abertos."})
+        results["data_found"].extend([
+            {"source": "SpiderFoot", "info": f"Buscando vazamentos de dados públicos para '{query}'..."},
+            {"source": "Vazamentos", "info": "0 ocorrências críticas recentes."}
+        ])
         
     return results
 

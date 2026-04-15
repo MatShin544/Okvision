@@ -1,17 +1,44 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const typeSelect = document.getElementById('type');
+    const targetBtns = document.querySelectorAll('.target-btn');
+    const selectionScreen = document.getElementById('selection-screen');
+    const queryScreen = document.getElementById('query-screen');
+    const backBtn = document.getElementById('back-btn');
+    const typeHidden = document.getElementById('type-hidden');
+    const modoTexto = document.getElementById('modo-texto');
     const extraFields = document.getElementById('extra-name-fields');
     const ageInput = document.getElementById('age');
-    
-    // Mostra as perguntas extras de Acordo com a Seleção (Nome e Idade)
-    typeSelect.addEventListener('change', (e) => {
-        if(e.target.value === 'Nome') {
-            extraFields.style.display = 'block';
-            ageInput.setAttribute('required', 'required');
-        } else {
-            extraFields.style.display = 'none';
-            ageInput.removeAttribute('required');
-        }
+    const queryInput = document.getElementById('query');
+
+    targetBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const type = btn.getAttribute('data-type');
+            typeHidden.value = type;
+            modoTexto.innerText = type.toUpperCase();
+            
+            // Logica para Nome
+            if (type === 'Nome') {
+                extraFields.style.display = 'block';
+                ageInput.setAttribute('required', 'required');
+                queryInput.placeholder = "Nome Completo (ex: Jon Doe)";
+            } else {
+                extraFields.style.display = 'none';
+                ageInput.removeAttribute('required');
+                if(type === 'Instagram') queryInput.placeholder = "@usuario";
+                else if(type === 'Email') queryInput.placeholder = "exemplo@email.com";
+                else queryInput.placeholder = "Insira o alvo...";
+            }
+            
+            selectionScreen.style.display = 'none';
+            queryScreen.style.display = 'block';
+            queryInput.focus();
+        });
+    });
+
+    backBtn.addEventListener('click', () => {
+        selectionScreen.style.display = 'block';
+        queryScreen.style.display = 'none';
+        typeHidden.value = '';
+        queryInput.value = '';
     });
 
     const form = document.getElementById('search-form');

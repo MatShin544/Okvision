@@ -5,33 +5,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OKvision - Resultados</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .terminal-box {
+            background-color: #000;
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            height: 400px;
+            overflow-y: scroll;
+            font-family: var(--font-family);
+            color: var(--text-color);
+            box-shadow: inset 0 0 10px rgba(0, 255, 0, 0.2);
+            text-align: left;
+            white-space: pre-wrap;
+        }
+    </style>
 </head>
 <body>
     <div class="hacker-container" style="max-width: 800px;">
         <header>
-            <h1 style="color: #fff;">[ RESULTADOS DA VARREDURA ]</h1>
+            <h1 class="glitch" data-text="TERMINAL">TERMINAL</h1>
             <p>> TARGET: <span class="highlight">{{ data.target }}</span> ({{ data.type }})</p>
         </header>
 
-        <main class="results-box">
-            <h2 class="sys-msg">> RELATÓRIO DO SISTEMA OBTIDO COM SUCESSO.</h2>
-            <div class="data-dump">
-                {% if data.data_found %}
-                    <ul>
-                    {% for item in data.data_found %}
-                        <li>
-                            <span class="source">[{{ item.source }}]:</span>
-                            <span class="info">{{ item.info }}</span>
-                        </li>
-                    {% endfor %}
-                    </ul>
-                {% else %}
-                    <p class="error">> NENHUM DADO PÚBLICO ENCONTRADO.</p>
-                {% endif %}
+        <main>
+            <div class="terminal-box" id="terminal-output">
+bash
+[+] Iniciando busca: {{ data.target }}
+{% for item in data.data_found %}
+[+] {{ item.source }}: {{ item.info }}{% endfor %}
+[!] Rastreamento concluído.
             </div>
         </main>
 
         <a href="/" class="back-link">> [ RETORNAR AO TERMINAL ]</a>
     </div>
+    
+    <script>
+        // Efeito de digitação para o terminal result
+        document.addEventListener("DOMContentLoaded", () => {
+            const terminal = document.getElementById("terminal-output");
+            const text = terminal.innerText;
+            terminal.innerText = "";
+            let i = 0;
+            function typeWriter() {
+                if (i < text.length) {
+                    terminal.innerHTML += text.charAt(i);
+                    i++;
+                    terminal.scrollTop = terminal.scrollHeight;
+                    setTimeout(typeWriter, Math.random() * 20 + 5);
+                }
+            }
+            typeWriter();
+        });
+    </script>
 </body>
 </html>

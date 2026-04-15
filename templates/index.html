@@ -14,39 +14,49 @@
         </header>
         
         <form id="search-form" action="/" method="POST">
-            <div class="form-group">
-                <label for="type">> SELECIONE O TIPO DE ALVO:</label>
-                <select name="type" id="type" required>
-                    <option value="" disabled selected>-- SELECIONE --</option>
-                    <option value="Instagram">Instagram/Username</option>
-                    <option value="Nome">Nome Completo</option>
-                    <option value="Email">E-mail</option>
-                    <option value="Telefone">Telefone</option>
-                </select>
-            </div>
-            
-            <div class="form-group">
-                <label for="query">> INSIRA A STRING DE BUSCA:</label>
-                <input type="text" name="query" id="query" placeholder="ex: jondoe ou Jon Doe" required autocomplete="off">
-            </div>
-            
-            <!-- Campos escondidos para 'Nome' conforme requisitado -->
-            <div id="extra-name-fields" style="display: none;">
-                <div class="form-group">
-                    <label for="age">> INFORME A IDADE (OBRIGATÓRIO):</label>
-                    <input type="number" name="age" id="age" placeholder="Ex: 35">
-                </div>
-                <div class="form-group">
-                    <label for="family">> FAMILIAR CONHECIDO:</label>
-                    <input type="text" name="family" id="family" placeholder="Nome da mãe, pai, irmão...">
-                </div>
-                <div class="form-group">
-                    <label for="workplace">> LOCAL DE TRABALHO:</label>
-                    <input type="text" name="workplace" id="workplace" placeholder="Empresa anterior ou atual">
+            <!-- Campo oculto que guardará o tipo selecionado pelos botões -->
+            <input type="hidden" name="type" id="type-hidden" value="">
+
+            <div id="selection-screen">
+                <p style="margin-bottom: 15px; font-weight: bold; font-size: 1.1rem;">> SELECIONE O TIPO DE ALVO:</p>
+                <div class="button-grid">
+                    <button type="button" class="target-btn" data-type="Instagram">Pesquisar por Instagram</button>
+                    <button type="button" class="target-btn" data-type="Nome">Pesquisar por Nome</button>
+                    <button type="button" class="target-btn" data-type="Email">Pesquisar por E-mail</button>
+                    <button type="button" class="target-btn" data-type="Facebook">Facebook</button>
+                    <button type="button" class="target-btn" data-type="TikTok">TikTok</button>
                 </div>
             </div>
             
-            <button type="submit" id="submit-btn">> INICIAR VARREDURA [ENTER]</button>
+            <div id="query-screen" style="display: none;">
+                <p id="selected-target-lbl" style="color: var(--main-color); margin-bottom: 20px;">> MODO: <span id="modo-texto"></span></p>
+
+                <div class="form-group">
+                    <label for="query" id="query-label">> INSIRA A STRING DE BUSCA:</label>
+                    <input type="text" name="query" id="query" placeholder="ex: jondoe ou Jon Doe" autocomplete="off">
+                </div>
+                
+                <!-- Campos escondidos para 'Nome' conforme requisitado -->
+                <div id="extra-name-fields" style="display: none;">
+                    <div class="form-group">
+                        <label for="age">> INFORME A IDADE (OBRIGATÓRIO):</label>
+                        <input type="number" name="age" id="age" placeholder="Ex: 35">
+                    </div>
+                    <div class="form-group">
+                        <label for="family">> FAMILIAR CONHECIDO:</label>
+                        <input type="text" name="family" id="family" placeholder="Nome da mãe, pai, irmão...">
+                    </div>
+                    <div class="form-group">
+                        <label for="workplace">> LOCAL DE TRABALHO:</label>
+                        <input type="text" name="workplace" id="workplace" placeholder="Empresa anterior ou atual">
+                    </div>
+                </div>
+                
+                <div style="display: flex; gap: 10px; margin-top: 20px;">
+                    <button type="button" id="back-btn" style="background: transparent; color: var(--main-color); width: 30%;">[ VOLTAR ]</button>
+                    <button type="submit" id="submit-btn" style="width: 70%;">> INICIAR VARREDURA [ENTER]</button>
+                </div>
+            </div>
         </form>
         
         <div id="progress-container" style="display: none;">

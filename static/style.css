@@ -96,6 +96,19 @@ button:hover {
     box-shadow: 0 0 10px var(--main-color);
 }
 
+.button-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.target-btn {
+    padding: 20px;
+    font-size: 1rem;
+    word-break: break-word;
+}
+.target-btn[data-type="Instagram"] { grid-column: 1 / -1; }
+
 /* Base Terminal Loader */
 #progress-container {
     margin-top: 25px;
