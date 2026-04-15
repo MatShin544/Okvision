@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OKvision - OSINT Tracker</title>
+    <!-- Usando link estático puro para o GitHub Pages -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .terminal-box {
+            background-color: #000;
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            height: 400px;
+            overflow-y: scroll;
+            font-family: var(--font-family);
+            color: var(--text-color);
+            box-shadow: inset 0 0 10px rgba(0, 255, 0, 0.2);
+            text-align: left;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="hacker-container shadow-eff mb-5" style="max-width: 800px; width: 100%;">
+        <header>
+            <h1 class="glitch" data-text="OKvision">OKvision</h1>
+            <p>> Sistema de Rastreamento OSINT Avançado _</p>
+        </header>
+
+        <!-- TELA DE SEARCH -->
+        <main id="main-view">
+            <form id="search-form">
+                <!-- Campo oculto que guardará o tipo selecionado pelos botões -->
+                <input type="hidden" name="type" id="type-hidden" value="">
+
+                <div id="selection-screen">
+                    <p style="margin-bottom: 15px; font-weight: bold; font-size: 1.1rem;">> SELECIONE O TIPO DE ALVO:</p>
+                    <div class="button-grid">
+                        <button type="button" class="target-btn" data-type="Instagram">Pesquisar por Instagram</button>
+                        <button type="button" class="target-btn" data-type="Nome">Pesquisar por Nome</button>
+                        <button type="button" class="target-btn" data-type="Email">Pesquisar por E-mail</button>
+                        <button type="button" class="target-btn" data-type="Facebook">Facebook</button>
+                        <button type="button" class="target-btn" data-type="TikTok">TikTok</button>
+                    </div>
+                </div>
+                
+                <div id="query-screen" style="display: none;">
+                    <p id="selected-target-lbl" style="color: var(--main-color); margin-bottom: 20px;">> MODO: <span id="modo-texto"></span></p>
+
+                    <div class="form-group">
+                        <label for="query" id="query-label">> INSIRA A STRING DE BUSCA:</label>
+                        <input type="text" name="query" id="query" placeholder="ex: jondoe ou Jon Doe" autocomplete="off">
+                    </div>
+                    
+                    <!-- Campos escondidos para 'Nome' -->
+                    <div id="extra-name-fields" style="display: none;">
+                        <div class="form-group">
+                            <label for="age">> INFORME A IDADE (OBRIGATÓRIO):</label>
+                            <input type="number" name="age" id="age" placeholder="Ex: 35">
+                        </div>
+                        <div class="form-group">
+                            <label for="family">> FAMILIAR CONHECIDO:</label>
+                            <input type="text" name="family" id="family" placeholder="Nome da mãe, pai, irmão...">
+                        </div>
+                        <div class="form-group">
+                            <label for="workplace">> LOCAL DE TRABALHO:</label>
+                            <input type="text" name="workplace" id="workplace" placeholder="Empresa anterior ou atual">
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; gap: 10px; margin-top: 20px;">
+                        <button type="button" id="back-btn" style="background: transparent; color: var(--main-color); width: 30%;">[ VOLTAR ]</button>
+                        <button type="submit" id="submit-btn" style="width: 70%;">> INICIAR VARREDURA [ENTER]</button>
+                    </div>
+                </div>
+            </form>
+            
+            <div id="progress-container" style="display: none;">
+                <div class="terminal-loader">
+                    <div class="terminal-text" id="status-text">> Iniciando terminal OKvision...</div>
+                    <div class="progress-bar-wrap">
+                        <div class="progress-bar"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- TELA DE RESULTADOS DO TERMINAL -->
+        <main id="results-view" style="display: none;">
+            <div class="terminal-box" id="terminal-output"></div>
+            <button id="reset-btn" style="margin-top: 20px;">> [ NOVA CONSULTA ]</button>
+        </main>
+
+    </div>
+    
+    <!-- Usando link estático puro para o GitHub Pages -->
+    <script src="script.js"></script>
+</body>
+</html>
